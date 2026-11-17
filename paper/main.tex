@@ -1,0 +1,396 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:\nolinkurl{#1}}}
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{arXiv:\nolinkurl{#1}}}
+\newcommand{\pd}{\partial}
+\setlength{\emergencystretch}{2.5em}
+
+\begin{document}
+
+\title[Connective constant of non-simple transitive graphs of degree five]{The connective constant of
+non-simple transitive graphs of degree five}
+\author{Yitzchak Shmalo}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yspennstate@gmail.com}
+\subjclass[2020]{05C30, 05C40, 60K35, 82B41}
+\keywords{self-avoiding walk, connective constant, transitive graph, multigraph, edge connectivity}
+
+\begin{abstract}
+Grimmett and Li proved that the connective constant $\mu$ of an infinite, connected, $\Delta$-regular,
+vertex-transitive graph satisfies $\mu\ge\sqrt{\Delta-1}$ when the graph is simple, and also when it has multiple
+edges and $\Delta\le4$, and asked whether the second statement holds for $\Delta\ge5$. We prove it for $\Delta=5$:
+every infinite, connected, $5$-regular, vertex-transitive, loopless multigraph has $\mu\ge2$, with equality for the
+bridge graph. The proof passes to the quotient by the atoms, the smallest finite vertex sets with the fewest boundary edges, where the branching
+inequality of Grimmett and Li holds. Each walk of the quotient lifts to many walks of the graph, counted by
+self-avoiding paths inside the atoms, and a convexity argument gives growth rate at least $\sqrt{\Delta-1}$ under
+a condition on the atoms alone. For degree five the four possible atom types satisfy it.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Let $G=(V,E)$ be an infinite, connected, locally finite graph, possibly with multiple edges but without loops. A
+self-avoiding walk (SAW) is an alternating sequence of vertices and edges in which consecutive vertices are the ends
+of the edge between them and no vertex appears twice; parallel edges give different walks. Fix $v\in V$ and let
+$c_k(v)$ be the number of $k$-step SAWs starting at $v$. When $G$ is vertex-transitive, $c_k=c_k(v)$ does not depend
+on $v$, the sequence is submultiplicative, and $\mu(G)=\lim_kc_k^{1/k}=\inf_kc_k^{1/k}$ is the \emph{connective
+constant} of $G$ \cite{HM54}. If $G$ is $\Delta$-regular, that is, every vertex has degree $\Delta$, then $\mu(G)\le\Delta-1$.
+
+Grimmett and Li proved the following lower bound \cite[Theorem~4.1]{GL15}. Let $G$ be an infinite, connected,
+$\Delta$-regular, vertex-transitive graph with $\Delta\ge2$. If $G$ is simple, then $\mu(G)\ge\sqrt{\Delta-1}$;
+if $G$ is non-simple and $\Delta\le4$, then again $\mu(G)\ge\sqrt{\Delta-1}$. The bound is attained by the bridge
+graph $B_\Delta$, the two-way infinite path in which every second edge is replaced by $\Delta-1$ parallel edges. They
+ask whether the second statement extends to $\Delta\ge5$ \cite{GL15}; this is Question~2.2 of their survey
+\cite{GL19}, and Question~4 of \cite{GL13}. We settle the first open case.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be an infinite, connected, $5$-regular, vertex-transitive, loopless multigraph. Then $\mu(G)\ge2$.
+\end{theorem}
+
+The bridge graph $B_5$ has $\mu(B_5)=2$, so the constant cannot be improved.
+
+\subsection*{The method}
+Let $\lambda(G)$, the \emph{finite-set edge connectivity}, be the least number of edges leaving a finite nonempty set
+of vertices. If $\lambda(G)=\Delta$,
+the inequality follows from the branching argument of Grimmett and Li, which needs $\Delta$ edge-disjoint infinite
+SAWs from every vertex (Section~\ref{sec:branch}). The difficulty with multiple edges is that $\lambda(G)$ may be
+smaller than $\Delta$; in $B_\Delta$ it is $2$. When $\lambda<\Delta$, the finite sets of least size attaining
+$\lambda$, the \emph{atoms}, partition $V$ into blocks of a common size $a$, and every vertex sends the same number $e$
+of edges out of its block (Section~\ref{sec:atoms}; these are edge versions of the atoms used by Watkins \cite{Wat70} for the
+connectivity of finite transitive graphs). Mader \cite{Mad71} proved that the edge connectivity of a finite connected
+vertex-transitive simple graph equals its degree. Collapsing each atom to a vertex gives an $ae$-regular quotient
+$H$ in which every finite set has at least $ae$ boundary edges, so the branching inequality holds in $H$. A SAW of $H$
+lifts to SAWs of $G$ by choosing a SAW inside each atom it visits, and the lifts of a fixed walk are counted by a
+product of path sums (Section~\ref{sec:lift}). Lemma~\ref{lem:weighted} gives a criterion, in terms of these path sums
+alone, under which the branching inequality forces the weighted count of lifts to stay bounded below at the scale
+$(\Delta-1)^{-k/2}$, which gives $\mu\ge\sqrt{\Delta-1}$. The criterion reads
+\[
+\psi\bigl(\tfrac{ae-2}2\bigr)\ \ge\ 0,
+\]
+where $W(b)$ is the least total weight of $b+1$ of the edges by which a lifted walk can leave an atom, and $\psi$ is
+the lower convex envelope of $\log W$ on $\{0,1,\dots,ae-2\}$. For $\Delta=5$ there are four atom types, and
+Section~\ref{sec:five} checks the criterion for each.
+
+\begin{center}
+\begin{tabular}{ll}
+Section~\ref{sec:branch} & edge-disjoint rays and the branching inequality (Lemma~\ref{lem:rays}, Lemma~\ref{lem:branch})\\
+Section~\ref{sec:atoms} & atoms and the quotient $H$ (Lemma~\ref{lem:atoms})\\
+Section~\ref{sec:lift} & lifting walks of $H$ to $G$; the weighted criterion (Lemma~\ref{lem:weighted})\\
+Section~\ref{sec:five} & the four atom types of degree five; proof of Theorem~\ref{thm:main}\\
+Section~\ref{sec:remarks} & what the criterion gives in higher degree
+\end{tabular}
+\end{center}
+
+Throughout, $T=\sqrt{\Delta-1}$ and $t=1/T$. Since $\mu=\inf_kc_k^{1/k}$, the power series $\sum_kc_kz^k$ has radius
+of convergence $1/\mu$; so $\sum_kc_kt^k=\infty$ implies $\mu\ge T$.
+
+\section{Edge-disjoint rays and the branching inequality}\label{sec:branch}
+
+In this section $H$ is an infinite, connected, loopless, $d$-regular multigraph with $d\ge2$ such that every finite
+nonempty vertex set $S$ satisfies $|\pd S|\ge d$, where $\pd S$ is the set of edges with exactly one end in $S$. A
+\emph{ray} is an infinite SAW.
+
+\begin{lemma}\label{lem:rays}
+For every vertex $w$ of $H$ there are $d$ edge-disjoint rays from $w$, one beginning with each edge at $w$.
+\end{lemma}
+
+\begin{proof}
+Let $R$ be large and let $H_R$ be the finite multigraph obtained from $H$ by identifying all vertices at graph
+distance more than $R$ from $w$ to a single vertex $z$ and deleting the loops this creates. A set of edges separating
+$w$ from $z$ in $H_R$ contains $\pd S$ for a finite set $S\ni w$ of vertices of $H$, so it has at least $d$ edges. By
+Menger's theorem there are $d$ edge-disjoint paths from $w$ to $z$ in $H_R$; truncating each before $z$ gives a path in $H$
+from $w$ reaching distance $R$. Since $H$ is locally finite, a diagonal argument over $R\to\infty$ gives $d$ edge-disjoint rays from
+$w$. As $w$ has exactly $d$ edges, each ray begins with a different one.
+\end{proof}
+
+Let $\pi=v_0h_0v_1h_1v_2\cdots$ be a ray of $H$, and write $\pi_s$ for its initial segment ending at $v_s$. For
+$s\ge0$, an edge $f$ at $v_s$, not on $\pi_s$, is \emph{extendable at $s$} if some ray begins with $\pi_s$ followed
+by $f$; the edge $h_s$ is one of them. Write $B_s$ for the number of edges other than $h_s$ that are extendable at
+$s$. This number depends only on $\pi_s$. By Lemma~\ref{lem:rays} every edge at $v_0$ is extendable at $0$, so
+$B_0=d-1$. For $s\ge1$ there are $d-2$ edges at $v_s$ other than $h_{s-1}$ and $h_s$, and we write $b_s=B_s$ and
+$r_s=d-2-b_s$ for the numbers of these that are and are not extendable at $s$. Put $b_0=d-2$.
+
+The following is inequality (5.3) of \cite{GL15}, which Grimmett and Li derive from their condition $\Pi$, a rule assigning to each
+non-extendable edge a path back to the walk that begins with that edge. We give
+the argument directly in terms of edge-disjoint rays; it includes the case of an edge that leads straight back to an
+earlier vertex of $\pi$, which condition $\Pi$, read literally, does not cover.
+
+\begin{lemma}\label{lem:branch}
+For every ray $\pi$ of $H$ and every $n\ge1$,
+\[
+\sum_{s=0}^{2n-1}b_s\ \ge\ n(d-2).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $N=2n$, $B=\sum_{s=0}^{N-1}B_s$ and $R=\sum_{s=1}^{N-1}r_s$. Then
+\begin{equation}\label{eq:BR}
+B+R=(d-1)+(N-1)(d-2)=N(d-2)+1.
+\end{equation}
+We construct an injective map from the non-extendable edges counted by $R$ to the extendable edges counted by $B$.
+
+Let $1\le s\le N-1$. By Lemma~\ref{lem:rays} choose $d$ edge-disjoint rays from $v_s$, one beginning with each edge at
+$v_s$. Let $g$ be an edge at $v_s$, other than $h_{s-1}$ and $h_s$, that is not extendable at $s$, and let $\rho$ be
+the chosen ray beginning with $g$. Then $\rho$ meets $\{v_0,\dots,v_{s-1}\}$, since otherwise $\pi_s$ followed by
+$\rho$ would be a ray. Let $y$ be the first vertex of $\rho$ after $v_s$ in that set, let $f=\langle x,y\rangle$ be the
+edge of $\rho$ entering $y$, and let $\omega$ be the part of $\rho$ from $v_s$ to $x$. Thus $\omega$ meets $\pi_s$ only
+at $v_s$; it is empty, with $x=v_s$ and $f=g$, when $g$ joins $v_s$ to $y$.
+
+The walk $\omega$ meets no vertex $v_k$ with $k>s$. Indeed, $\omega$ followed by $f$ starts with $g$, and if it met
+such a vertex, then $\pi_s$, followed by $\rho$ up to its first such vertex $v_k$, followed by the tail of $\pi$ from
+$v_k$, would be a ray beginning with $\pi_s$ and $g$. Hence, if $y=v_i$, the walk
+\[
+\pi_i,\ f,\ \omega\text{ reversed},\ v_s h_s v_{s+1}h_{s+1}\cdots
+\]
+is a ray: $\pi_i$ and the tail of $\pi$ from $v_s$ are disjoint, $\omega$ meets $\pi$ only at $v_s$, and $x$ lies on
+$\pi$ only if $\omega$ is empty. So $f$ is extendable at $i<s$. It is not $h_i$: if $\omega$ is nonempty then $x$ is
+off $\pi$, and if $\omega$ is empty then $f=g$ is not an edge of $\pi$. Map $g$ to $f$.
+
+The map is injective. Distinct edges $g$ at the same $v_s$ give distinct $f$, as the rays are edge-disjoint. Suppose
+$g$ at $v_s$ and $g'$ at $v_t$, with $s<t$, give the same edge $f$, with walks $\omega$, $\omega'$. If $\omega$ is
+empty, both ends of $f$ lie in $\{v_0,\dots,v_s\}$; but $\omega'$ ends at a vertex $x'$ of $f$ that is not in
+$\{v_0,\dots,v_{t-1}\}$, which is impossible. If $\omega'$ is empty, both ends of $f$ lie on $\pi$, while $\omega$
+nonempty has its end $x$ off $\pi$. So both are nonempty, $f=\langle x,y\rangle$ for both, and $\omega$, $\omega'$
+both end at $x$. Let $z$ be the first vertex of $\omega$ that lies on $\omega'$. Then $\omega$ up to $z$, followed by
+$\omega'$ backwards from $z$ to $v_t$, followed by the tail of $\pi$ from $v_t$, is a ray that begins with $\pi_s$ and
+$g$: the first piece meets $\pi$ only at $v_s$, the second meets $\pi$ only at $v_t$, the two meet only at $z$, and
+neither meets the tail of $\pi$ beyond $v_t$. This contradicts the choice of $g$.
+
+Therefore $R\le B$, and \eqref{eq:BR} gives $2B\ge N(d-2)+1$. Since $B$ is an integer and $N(d-2)=2n(d-2)$ is even,
+$B\ge n(d-2)+1$. Finally $\sum_{s=0}^{N-1}b_s=B-1\ge n(d-2)$.
+\end{proof}
+
+The \emph{tree of extendable walks} from $v_0$ has as nodes the finite SAWs from $v_0$ that are initial segments of
+rays, each joined to its one-step extensions. A node $\pi_s$ with $s\ge1$ has exactly $b_s+1$ children, and the root
+has $d$ children.
+
+\section{Atoms}\label{sec:atoms}
+
+Let $G$ be an infinite, connected, $\Delta$-regular, vertex-transitive, loopless multigraph, and suppose
+$\lambda=\lambda(G)<\Delta$. A \emph{fragment} is a finite nonempty $S\subset V$ with $|\pd S|=\lambda$, and an
+\emph{atom} is a fragment of least cardinality $a$. Atoms of this kind are the edge version of those of Watkins \cite{Wat70}. Mader \cite{Mad71} proved
+that a finite connected vertex-transitive simple graph has edge connectivity equal to its degree. We prove the properties
+we need, since $G$ is infinite and has multiple edges.
+For an atom $A$, write $G[A]$ for the multigraph on $A$ formed by the edges of $G$ with both ends in $A$, and
+$E_A(S,A\setminus S)$ for its set of edges between $S$ and $A\setminus S$.
+
+\begin{lemma}\label{lem:atoms}
+\begin{enumerate}
+\item $a\ge2$, and every nonempty proper subset $S$ of an atom has $|\pd S|>\lambda$.
+\item The atoms partition $V$.
+\item There is $e\ge1$ such that every vertex has exactly $e$ edges leaving its atom, and $\lambda=ae<\Delta$.
+\item For every atom $A$, the multigraph $G[A]$ is loopless, connected and $(\Delta-e)$-regular, and every nonempty
+proper $S\subset A$ satisfies $e|S|+|E_A(S,A\setminus S)|>ae$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) A single vertex has $|\pd\{v\}|=\Delta>\lambda$, and a nonempty proper subset of an atom is too small to be a
+fragment. (2) Let $A\ne B$ be atoms with $A\cap B\ne\emptyset$. Then $A\cap B$ is a nonempty proper subset of $A$, so
+$|\pd(A\cap B)|>\lambda$ by (1), and submodularity, $|\pd(A\cap B)|+|\pd(A\cup B)|\le|\pd A|+|\pd B|=2\lambda$, gives
+$|\pd(A\cup B)|<\lambda$, which is impossible. Automorphisms map atoms to atoms and an atom exists, so by
+transitivity every vertex lies in an atom, which is unique. (3) If $x,y\in A$ and $\gamma$ is an automorphism with
+$\gamma x=y$, then $\gamma A$ is an atom through $y$, so $\gamma A=A$ by (2). Hence the stabiliser of $A$ is
+transitive on $A$, and the number of edges from a vertex of $A$ to $V\setminus A$ is constant on $A$, say $e$. Then
+$\lambda=|\pd A|=ae$, and $e\ge1$ as $G$ is connected and infinite. (4) The degree statement follows from (3). For
+nonempty proper $S\subset A$ we have $|\pd S|=e|S|+|E_A(S,A\setminus S)|$, and (1) gives the inequality. Since
+$e|S|<ae$, it forces $E_A(S,A\setminus S)\ne\emptyset$, so $G[A]$ is connected.
+\end{proof}
+
+Let $H$ be the multigraph whose vertices are the atoms of $G$, with one edge for each edge of $G$ joining two
+distinct atoms. It is loopless, connected, infinite and $ae$-regular. For a finite nonempty set $\mathcal S$ of atoms,
+the edges of $H$ leaving $\mathcal S$ are the edges of $G$ leaving the union of $\mathcal S$, and there are at least
+$\lambda=ae$ of them. So $H$ satisfies the hypothesis of Section~\ref{sec:branch} with $d=ae$.
+
+\section{Lifting walks from the quotient}\label{sec:lift}
+
+For an atom $A$ and $u,w\in A$ let
+\[
+P_{uw}=\sum_\gamma t^{|\gamma|},
+\]
+the sum over SAWs $\gamma$ from $u$ to $w$ in $G[A]$, where $|\gamma|$ is the number of steps; in particular
+$P_{uu}=1$. When $\lambda=\Delta$ we take every atom to be a single vertex, so that $H=G$, $a=1$ and $e=\Delta$.
+
+Fix a vertex $r$ in the atom $A_0$. Let $\varpi=A_0h_0A_1h_1\cdots A_N$ be a SAW in $H$. Each $h_s$ is an edge of $G$
+from a vertex $u'_s\in A_s$ to a vertex $u_{s+1}\in A_{s+1}$; put $u_0=r$. A \emph{lift} of $\varpi$ is a choice,
+for each $s<N$, of a SAW $\gamma_s$ in $G[A_s]$ from $u_s$ to $u'_s$. The walk
+$\gamma_0h_0\gamma_1h_1\cdots\gamma_{N-1}h_{N-1}$ is a SAW of $G$ from $r$, because the atoms $A_s$ are distinct and
+each $\gamma_s$ is self-avoiding. Distinct pairs of a walk and a lift, for all $N$ together, give distinct SAWs of
+$G$: the edges of the $G$-walk that join different atoms recover $\varpi$, and the segments between them recover the
+$\gamma_s$. Summing over lifts and keeping only the walks $\varpi$ in the tree of extendable walks of $H$,
+\begin{equation}\label{eq:lift}
+\sum_kc_kt^k\ \ge\ \sum_{N\ge1}Z_N,\qquad Z_N=\sum_\varpi\ \prod_{s<N}tP_{u_su'_s},
+\end{equation}
+the sum over extendable $N$-step SAWs $\varpi$ of $H$ from $A_0$.
+
+Thus in the tree of extendable walks of $H$, the edge from a node ending at $A_s$, entered at $u_s$, to the child
+through $h_s$ carries the weight $tP_{u_su'_s}$. Of the $ae-1$ edges of $H$ at $A_s$ other than the entry edge, $e-1$
+start at $u_s$ and have weight $t$, and for each $w\in A_s\setminus\{u_s\}$, $e$ start at $w$ and have weight
+$tP_{u_sw}$.
+
+Write $d=ae$ and $c=(d-2)/2$. For $0\le b\le d-2$ let $W(b)$ be the least total weight of $b+1$ of the $d-1$
+non-entry edges at an atom, minimised over the entry vertex and the choice of edges; it is the sum of the $b+1$
+smallest weights for the worst entry vertex. All weights are positive, so $W$ is increasing. Let $\varphi=\log W$ on
+$\{0,1,\dots,d-2\}$ and let $\psi$ be its lower convex envelope, the largest convex function on $[0,d-2]$ lying below
+$\varphi$ at the integers.
+
+\begin{lemma}\label{lem:weighted}
+If $\psi(c)\ge0$, then there is $\kappa>0$ with $Z_{2n}\ge\kappa$ for all $n\ge1$. Consequently
+$\mu(G)\ge\sqrt{\Delta-1}$.
+\end{lemma}
+
+\begin{proof}
+For a node $y$ of the tree at depth less than $2n$, let $Z(y)$ be the sum, over the descendants of $y$ at depth $2n$,
+of the product of the edge weights on the path from $y$ to the descendant; so $Z_{2n}$ is the value at the root. If
+$y$ is not the root and ends at $v_s$, it has $b_s+1$ children $z$, joined to it by non-entry edges, and
+\[
+Z(y)=\sum_zw(y,z)Z(z)\ \ge\ W(b_s)\min_zZ(z).
+\]
+At the root, $Z\ge w_{\min}\min_zZ(z)$, where $w_{\min}>0$ is the least weight of an edge of $H$ at $A_0$ from $r$. By
+induction,
+\[
+Z_{2n}\ \ge\ w_{\min}\ \min_\varpi\ \prod_{s=1}^{2n-1}W(b_s),
+\]
+the minimum over extendable $2n$-step SAWs $\varpi$ of $H$ from $A_0$. Each such walk is an initial segment of a ray,
+and the numbers $b_s$ depend only on the walk, so Lemma~\ref{lem:branch} and $b_0=d-2=2c$ give
+$\sum_{s=1}^{2n-1}b_s\ge2nc-2c$. If $d=2$, every nonroot node has exactly one child, $\psi(0)=\log W(0)\ge0$, and
+hence $Z_{2n}\ge w_{\min}W(0)^{2n-1}\ge w_{\min}$; so we may assume $d>2$. The function $\psi$ is convex and piecewise linear. It is nondecreasing, since the
+constant $\varphi(0)$ lies below $\varphi$, so that $\psi\ge\varphi(0)=\psi(0)$. Let $L$ be its largest slope. With
+$\bar b$ the average of $b_1,\dots,b_{2n-1}$, we have $\bar b\ge c-c/(2n-1)$, and by Jensen's inequality
+\[
+\sum_{s=1}^{2n-1}\varphi(b_s)\ \ge\ \sum_{s=1}^{2n-1}\psi(b_s)\ \ge\ (2n-1)\psi(\bar b)\ \ge\
+(2n-1)\psi(c)-Lc\ \ge\ -Lc.
+\]
+So $Z_{2n}\ge w_{\min}e^{-Lc}=:\kappa$. By \eqref{eq:lift}, $\sum_kc_kt^k=\infty$, and $\mu(G)\ge1/t$.
+\end{proof}
+
+When $\lambda=\Delta$, every weight is $t$, $W(b)=(b+1)t$, and $\varphi$ is concave; so $\psi$ is the chord from $0$
+to $\Delta-2$ and $\psi(c)=\tfrac12\bigl(\log t+\log((\Delta-1)t)\bigr)=0$. Lemma~\ref{lem:weighted} then gives
+$\mu\ge\sqrt{\Delta-1}$, which for simple graphs is \cite[Theorem~4.1(a)]{GL15}.
+
+\section{Degree five}\label{sec:five}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By the last paragraph of Section~\ref{sec:lift} we may assume $\lambda<5$. Here $t=1/2$. By Lemma~\ref{lem:atoms},
+$a\ge2$ and $ae\le4$, so $(a,e)$ is $(2,1)$, $(2,2)$, $(3,1)$ or $(4,1)$. We show $\psi(c)\ge0$ in each case, and
+Lemma~\ref{lem:weighted} gives $\mu(G)\ge2$.
+
+$(a,e)=(2,1)$. The atom is a pair joined by $4$ parallel edges, $d=2$ and $c=0$. The only non-entry edge has weight
+$t\cdot4t=1$, so $\psi(0)=\log W(0)=0$.
+
+$(a,e)=(2,2)$. The atom $\{x,x'\}$ is joined by $3$ parallel edges, $d=4$ and $c=1$. Entering at $x$, the non-entry
+edges are one edge at $x$ of weight $\tfrac12$ and two edges at $x'$ of weight $t\cdot3t=\tfrac34$. So
+$W(0)=\tfrac12$, $W(1)=\tfrac54$, $W(2)=2$, and
+\[
+\psi(1)=\min\Bigl(\log\tfrac54,\ \tfrac12\bigl(\log\tfrac12+\log2\bigr)\Bigr)=0.
+\]
+
+$(a,e)=(3,1)$. $G[A]$ is a loopless $4$-regular multigraph on three vertices, so each pair of vertices is joined by
+$2$ edges, and $d=3$, $c=\tfrac12$. For $u\ne w$, $P_{uw}=2t+4t^2=2$, so every weight is $tP_{uw}=1$. Hence
+$W(0)=1$, $W(1)=2$ and $\psi(\tfrac12)=\tfrac12\log2>0$.
+
+$(a,e)=(4,1)$. $G[A]$ is a loopless $4$-regular multigraph on four vertices, and $d=4$, $c=1$. By
+Lemma~\ref{lem:atoms}(4) applied to $S=\{u,w\}$, whose edges to the other two vertices number $8-2m_{uw}$ where
+$m_{uw}$ is the multiplicity of the pair, we get $2+8-2m_{uw}>4$, so $m_{uw}\le2$. The four degree equations force opposite pairs to have equal
+multiplicities; writing the three values as $x,y,z$, we have $x+y+z=4$ and $0\le x,y,z\le2$, so $\{x,y,z\}$ is
+$\{2,2,0\}$ or $\{2,1,1\}$, each in three labelled forms. Thus $G[A]$ is either the $4$-cycle with every edge doubled or
+$K_4$ with the edges of one perfect matching doubled. In the doubled $4$-cycle, $P_{uw}=8t^2=2$ for opposite $u,w$ and
+$P_{uw}=2t+8t^3=2$ for adjacent ones. In $K_4$ with the matching $\{uv,wz\}$ doubled,
+$P_{uv}=2t+2t^2+4t^3=2$ and $P_{uw}=t+4t^2+5t^3=\tfrac{17}8$, and likewise for the other pairs. In both cases
+every weight $tP_{uw}$ is at least $1$, so $W(b)\ge b+1$ and $\psi(1)\ge\tfrac12\log3>0$.
+\end{proof}
+
+The program \texttt{delta5\_check.py} in the repository \cite{Repo} enumerates the labelled loopless multigraphs of
+each of the four types that satisfy Lemma~\ref{lem:atoms}(4), computes the path sums exactly by listing the SAWs, and
+returns the least value of $\psi(c)$ over the shapes and entry vertices: $0$, $0$, $\tfrac12\log2$ and
+$\tfrac12\log3$ for the four types, with one, one, one and six labelled shapes.
+
+\section{Higher degree}\label{sec:remarks}
+
+Sections~\ref{sec:branch}--\ref{sec:lift} hold for every $\Delta$: $\mu(G)\ge\sqrt{\Delta-1}$ whenever every atom type
+$(a,e,G[A])$ allowed by Lemma~\ref{lem:atoms} has $\psi(c)\ge0$. The criterion is not always met. For atoms of size
+two with $e=2$ joined by $m=\Delta-2$ edges, the weights are $t$ once and $mt^2$ twice, and
+$\psi(1)=\tfrac12\log\bigl(t(t+2mt^2)\bigr)$. With $s=\sqrt{\Delta-1}$ we have
+$t(t+2mt^2)=(2s^2+s-2)/s^3$, and this is less than $1$ exactly when $(s-2)(s^2-1)>0$, that is, when $\Delta\ge6$. In
+that case a tree in which nodes with one child alternate with nodes having all three children satisfies
+Lemma~\ref{lem:branch} and has weighted growth below one, so for $\Delta\ge6$ the branching inequality in the quotient
+does not suffice on its own, and the question of Grimmett and Li remains open.
+
+Restricting self-avoiding walks so that they cross each of a family of finite pieces of the graph at most once, as the
+lifted walks of Section~\ref{sec:lift} cross each atom once, also appears in the work of Grimmett and Li on the Fisher
+transformation \cite{GL20} and of Grimmett on Grigorchuk graphs \cite[Remark~3.4]{Gri26}. In
+\cite[Proposition~7.4]{GL20}, and in Grimmett's bound for line graphs \cite[Theorem~7.2]{Gri26b}, walks of a base graph
+are lifted to the Fisher graph or the line graph with weights given by path counts inside the replaced pieces.
+
+\section*{Acknowledgements and funding}
+This work was done by AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo}
+and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents
+record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and
+audit each other's work. For more on the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math
+Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25). Computational resources were provided in part by Google Cloud through its education credits programme
+(credit 530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Data availability}
+The program described at the end of Section~\ref{sec:five} is in the repository~\cite{Repo}.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+This paper is part of a broader research project on AI proving problems. Claude agents (Anthropic) proved
+Theorem~\ref{thm:main}, wrote the program of Section~\ref{sec:five} and prepared the manuscript; a Codex agent
+(OpenAI) checked the proof and supplied the direct form of the proof of Lemma~\ref{lem:branch}. The branching
+inequality, the bridge graph and the question are due to Grimmett and Li~\cite{GL15,GL19}, lifts weighted by path counts inside pieces to Grimmett and
+Li and to Grimmett~\cite{GL20,Gri26b}, atoms, in their vertex form, to Watkins~\cite{Wat70}, and the equality of edge connectivity and degree for
+finite vertex-transitive simple graphs to Mader~\cite{Mad71}. The use of
+edge-connectivity atoms together with the weighted branching criterion of Lemma~\ref{lem:weighted} is the
+contribution here. The author directed the work and is responsible for the content of the paper
+and for decisions concerning its dissemination.
+
+\begin{thebibliography}{99}
+\bibitem{GL13} G.~R. Grimmett and Z.~Li, \emph{Counting self-avoiding walks}, preprint, 2013, \arxiv{1304.7216}.
+\bibitem{GL15} G.~R. Grimmett and Z.~Li, \emph{Bounds on connective constants of regular graphs}, Combinatorica
+\textbf{35} (2015), 279--294, \doi{10.1007/s00493-014-3044-0}; \arxiv{1210.6277}.
+\bibitem{GL19} G.~R. Grimmett and Z.~Li, \emph{Self-avoiding walks and connective constants}, in \emph{Sojourns in
+Probability Theory and Statistical Physics III}, Springer Proc. Math. Stat. \textbf{300}, Springer, Singapore, 2019,
+215--241, \doi{10.1007/978-981-15-0302-3_8}; \arxiv{1704.05884}.
+\bibitem{GL20} G.~R. Grimmett and Z.~Li, \emph{Cubic graphs and the golden mean}, Discrete Math. \textbf{343} (2020),
+111638, \doi{10.1016/j.disc.2019.111638}; \arxiv{1610.00107}.
+\bibitem{Gri26} G.~R. Grimmett, \emph{Connective constants of Grigorchuk graphs}, preprint, 2026, \arxiv{2608.19349}.
+\bibitem{Gri26b} G.~R. Grimmett, \emph{SAWs, trails, kites, patterns}, preprint, 2026, \arxiv{2611.00816}.
+\bibitem{HM54} J.~M. Hammersley and K.~W. Morton, \emph{Poor man's Monte Carlo}, J. Roy. Statist. Soc. Ser. B
+\textbf{16} (1954), 23--38, \doi{10.1111/j.2517-6161.1954.tb00145.x}.
+\bibitem{Mad71} W.~Mader, \emph{Minimale $n$-fach kantenzusammenh\"angende Graphen}, Math. Ann. \textbf{191} (1971),
+21--28, \doi{10.1007/BF01433466}.
+
+\bibitem{Wat70} M.~E. Watkins, \emph{Connectivity of transitive graphs}, J. Combin. Theory \textbf{8} (1970), 23--29,
+\doi{10.1016/S0021-9800(70)80005-9}.
+\bibitem{Repo} Y.~Shmalo, \emph{The connective constant of non-simple transitive graphs of degree five: paper and
+check program}, 2026, release v1.0,
+\url{https://github.com/yspennstate/connective-constant-degree-five/tree/v1.0}.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public/tree/8c9a6bd478c4ec4082347151b7ae16db50c917dd}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical
+research}, 2026, \doi{10.5281/zenodo.24150837},
+\url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public/tree/5629e644cdd510173ae97e9aa92642dabd22dc57}.
+\end{thebibliography}
+
+\end{document}
